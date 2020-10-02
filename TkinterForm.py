@@ -1,7 +1,16 @@
 from openpyxl import *
 from tkinter import *
+import os
+from tkinter import Canvas
 
-wb = load_workbook('C:\\Users\\Nim_Ish\\Desktop\\Book1.xlsx')
+canvas=Canvas(width=700,height=600)
+canvas.create_rectangle(50,50,650,550,outline='grey',fill='grey')
+canvas.pack()
+
+current_working_directory=os.getcwd()
+excel_location=os.path.join(current_working_directory,'Book1.xlsx')
+#wb = load_workbook('C:\\Users\\Nim_Ish\\Desktop\\Book1.xlsx')
+wb = load_workbook(excel_location)
 
 sheet = wb.active
 
@@ -49,39 +58,40 @@ def insert():
 
 
 if __name__ == "__main__":
-    root = Tk()
-    root.configure(background='grey')
-    root.title("registration form")
-    root.geometry("500x300")
+    #root = Tk()
+    #canvas.minsize(700,700)
+    #canvas.configure(background='grey')
+    #canvas.title("registration form")
+    #root.geometry("500x300")
 
     excel()
-    heading = Label(root, text="Form", bg="grey")
-    name = Label(root, text="Name", bg="grey")
-    contact_no = Label(root, text="Contact No.", bg="grey")
-    email_id = Label(root, text="Email id", bg="grey")
-    address = Label(root, text="Address", bg="grey")
+    heading = Label(canvas, text="Form",bg='SeaGreen1',font=('Verdana', 15),padx=5,pady=2)
+    name = Label(canvas, text="Name", bg='SeaGreen1',padx=5,pady=2)
+    contact_no = Label(canvas, text="Contact No.",bg='SeaGreen1',padx=5,pady=2)
+    email_id = Label(canvas, text="Email id", bg='SeaGreen1',padx=5,pady=2)
+    address = Label(canvas, text="Address",bg='SeaGreen1',padx=5,pady=2)
 
-    heading.grid(row=0, column=1)
-    name.grid(row=1, column=0)
-    contact_no.grid(row=2, column=0)
-    email_id.grid(row=3, column=0)
-    address.grid(row=4, column=0)
+    heading.place(relx=0.5,rely=0.2,anchor='center')
+    name.place(relx=0.2,rely=0.4)
+    contact_no.place(relx=0.2,rely=0.5)
+    email_id.place(relx=0.2,rely=0.6)
+    address.place(relx=0.2,rely=0.7)
 
-    name_field = Entry(root)
-    contact_no_field = Entry(root)
-    email_id_field = Entry(root)
-    address_field = Entry(root)
+    name_field = Entry(canvas)
+    contact_no_field = Entry(canvas)
+    email_id_field = Entry(canvas)
+    address_field = Entry(canvas)
 
-    name_field.grid(row=1, column=1, ipadx="100")
-    contact_no_field.grid(row=2, column=1, ipadx="100")
-    email_id_field.grid(row=3, column=1, ipadx="100")
-    address_field.grid(row=4, column=1, ipadx="100")
+    name_field.place(relx=0.6,rely=0.4)
+    contact_no_field.place(relx=0.6,rely=0.5)
+    email_id_field.place(relx=0.6,rely=0.6)
+    address_field.place(relx=0.6,rely=0.7)
 
     excel()
 
-    submit = Button(root, text="Submit", fg="Black",
-                    bg="Blue", command=insert)
-    submit.grid(row=8, column=1)
+    submit = Button(canvas, text="Submit", fg="Black"
+                    , command=insert,bg='SeaGreen1',font=('Verdana', 10),padx=5,pady=2)
+    submit.place(relx=0.5,rely=0.85,anchor='center')
 
-    # start the GUI
-    root.mainloop()
+     #start the GUI
+    canvas.mainloop()
